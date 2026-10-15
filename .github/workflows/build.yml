@@ -56,6 +56,9 @@ jobs:
             --onefile \
             --lto=yes \
             --python-flag=no_docstrings \
+            --include-package=websockets \
+            --include-package=foxglove_websocket \
+            --include-data-files=python_code/*.json=. \
             --output-filename=${{ matrix.executable_output }} \
             python_code/vm_server.py
 
@@ -68,9 +71,12 @@ jobs:
             --assume-yes-for-downloads `
             --lto=yes `
             --python-flag=no_docstrings `
+            --include-package=websockets `
+            --include-package=foxglove_websocket `
+            --include-data-files=python_code/*.json=. `
             --output-filename=${{ matrix.executable_output }} `
             python_code/vm_server.py
-
+            
       - name: Upload Compiled Binary Artifact
         uses: actions/upload-artifact@v4
         with:
