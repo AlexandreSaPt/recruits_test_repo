@@ -1,0 +1,38 @@
+# ============================================================================
+# Makefile.python  -  set up the "recruits_env" virtual environment and run
+#                     the Vehicle Model server (vm_server.py).
+#
+#   make -f Makefile.python           # same as "run"
+#   make -f Makefile.python env       # create recruits_env and install the libraries
+#   make -f Makefile.python run       # (creates the env if needed) and start vm_server.py
+#   make -f Makefile.python clean     # delete recruits_env
+#
+# Using conda instead of venv?  Activate your env and run:
+#   make -f Makefile.python run PYTHON=python
+# ============================================================================
+
+ENV_NAME := recruits_env
+ENV_DIR  := $(ENV_NAME)
+SYS_PY   ?= python3
+
+# Interpreter used to run the server (default: the one inside recruits_env)
+PYTHON   ?= $(ENV_DIR)/bin/python
+
+.PHONY: run env clean
+
+run: $(if $(filter $(PYTHON),$(ENV_DIR)/bin/python),$(ENV_DIR)/.installed)
+	$(PYTHON) vm_server.py
+
+env: $(ENV_DIR)/.installed
+
+# The stamp file is re-created whenever requirements.txt changes
+$(ENV_DIR)/.installed: requirements.txt
+	@echo ">> Creating virtual environment '$(ENV_NAME)'..."
+	$(SYS_PY) -m venv $(ENV_DIR)
+	$(ENV_DIR)/bin/python -m pip install --upgrade pip
+	$(ENV_DIR)/bin/python -m pip install -r requirements.txt
+	@touch $@
+	@echo ">> Environment '$(ENV_NAME)' is ready."
+
+clean:
+	rm -rf $(ENV_DIR)

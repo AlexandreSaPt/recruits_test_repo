@@ -1,0 +1,4 @@
+# Python dependencies for vm_server.py
+# (tested with foxglove-websocket 0.1.4 and websockets 17.2 on Python 3.12)
+websockets
+foxglove-websocket
