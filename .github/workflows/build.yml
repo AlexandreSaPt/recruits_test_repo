@@ -65,6 +65,7 @@ jobs:
           python -m nuitka `
             --standalone `
             --onefile `
+            --assume-yes-for-downloads `
             --lto=yes `
             --python-flag=no_docstrings `
             --output-filename=${{ matrix.executable_output }} `
