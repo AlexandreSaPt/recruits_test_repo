@@ -1,0 +1,12 @@
+venv/
+.venv/
+__pycache__/
+
+
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.out
+
