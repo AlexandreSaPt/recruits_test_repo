@@ -58,7 +58,6 @@ jobs:
             --python-flag=no_docstrings \
             --include-package=websockets \
             --include-package=foxglove_websocket \
-            --include-data-files=python_code/*.json=. \
             --output-filename=${{ matrix.executable_output }} \
             python_code/vm_server.py
 
@@ -73,7 +72,6 @@ jobs:
             --python-flag=no_docstrings `
             --include-package=websockets `
             --include-package=foxglove_websocket `
-            --include-data-files=python_code/*.json=. `
             --output-filename=${{ matrix.executable_output }} `
             python_code/vm_server.py
             
